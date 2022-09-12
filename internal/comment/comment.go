@@ -38,6 +38,7 @@ func NewService(store Store) *Service {
 
 func (s *Service) GetComment(ctx context.Context, id string) (Comment, error) {
 	fmt.Println("retrieving a comment")
+
 	cmt, err := s.Store.GetComment(ctx, id)
 	if err != nil {
 		fmt.Println(err)
