@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"context"
+    "context"
+	"github.com/sarapuertas/go-project/internal/comment"
     
 	"github.com/sarapuertas/go-project/internal/db"
 )
@@ -17,10 +18,17 @@ func Run() error {
 		fmt.Println("Failed to connect to the database")
 		return err
 	}
-    if err := db.Ping(context.Background()); err != nil {
+    if err := db.MigrateDB(); err != nil {
+		fmt.Println("failed to migrate db")
 		return err
 	} 
-    fmt.Println("successfully connected and pinged to the DB!")
+	
+
+	cmtService := comment.NewService(db)
+	fmt.Println(cmtService.GetComment(
+		context.Background(),
+		"50a174fa-3296-11ed-a261-0242ac120002",
+	))
 	
 	return nil
 }
