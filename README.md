@@ -1,7 +1,4 @@
 # Go REST API Course V2
-
-=======================
-
 ## Tools Needed
 
 - go version
